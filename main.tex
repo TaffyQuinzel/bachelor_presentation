@@ -1,0 +1,280 @@
+\documentclass[xetex,serif]{beamer}
+% \setbeamerfont{frametitle}{size=\Medium}
+\setbeamerfont{framesubtitle}{size=\large}
+
+% \usecolortheme{seahorse}
+\usecolortheme{crane}
+% \usetheme{Bergen}
+
+\usepackage{fontspec}
+\setmainfont{Source Serif Pro}
+\setmonofont{Source Code Pro}
+\usepackage{listings}
+\lstset{%
+basicstyle=\ttfamily,
+   morekeywords={Func,Data,TypeFunc,Module,TypeAlias,ArrowFunc,inherit},
+   breaklines=true,
+   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+}
+\usepackage{multicol}
+\usepackage{graphicx}
+
+\setcounter{tocdepth}{2}
+\AtBeginSubsection[] {%
+   \begin{frame}
+      \frametitle{Progress}
+      \tableofcontents[currentsection,currentsubsection]
+   \end{frame}
+}
+
+\title{Debugging and expanding\\ Meta Casanova}
+\author{Louis van der Burg}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{%
+   \frametitle{Introduction}
+   \begin{itemize}
+      \item Motive
+      \item Research questions
+      \item Results
+      \item Conclusion
+      \item Questions
+   \end{itemize}
+}
+\frame{%
+   \frametitle{Motive}
+   \begin{itemize}
+      \item Video game industry
+      \item Casanova
+      \item Meta Casanova
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{Research question}
+   How can the programming language Meta Casanova be improved for the user within the timeframe of the internship?
+}
+
+\frame{%
+   \frametitle{Sub research questions}
+   \begin{itemize}
+      \item What is a good programming language to the user?
+      \item What is MC and how does it work?
+      \item How can the current syntax be improved to serve the user?
+      \item How can the standard library be improved to serve the user?
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{What is a good programming language to the user?}
+   Criteria:
+   \begin{multicols}{2}
+      \begin{itemize}
+         \item Read- \& Writability
+         \item Simplicity
+         \item Definiteness
+         \item Predictability
+         \item Expressiveness
+         \item Implementability
+         \item Efficiency
+         \item Custom Libraries
+         \item Time
+         \item Hackability
+         \item Succinctness
+         \item Redesign
+         \item External Factors
+      \end{itemize}
+   \end{multicols}
+   Criteria are used as guidelines
+}
+
+\frame{%
+   \frametitle{What is MC and how does it work?}
+   \framesubtitle{Meta Casanova}
+      \begin{itemize}
+         \item Functional
+         \item Declarative
+         \item Pure
+      \end{itemize}
+}
+
+\frame{%
+   \frametitle{What is MC and how does it work?}
+   \framesubtitle{Basics: part one}
+   \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{intro2}
+}
+
+\frame{%
+   \frametitle{What is MC and how does it work?}
+   \framesubtitle{Basics: part two}
+      \begin{itemize}
+         \item TypeFunc
+         \item TypeAlias
+         \item Module
+      \end{itemize}
+}
+
+\begin{frame}[fragile]
+   \frametitle{How can the current syntax be improved to serve the user?}
+   \framesubtitle{Expanding Modules}
+
+   \begin{itemize}
+      \item Old
+         \begin{lstlisting}[escapechar=@]
+TypeFunc "expanding" => Module => Module
+expanding M => @\colorbox{red}{M}@{
+  ......
+}
+         \end{lstlisting}
+
+      \item New
+         \begin{lstlisting}[escapechar=@]
+TypeFunc "expanding" => Module => Module
+expanding M => @\colorbox{green}{Module}@{
+  @\colorbox{green}{inherit M}@
+  ......
+}
+         \end{lstlisting}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{How can the current syntax be improved to serve the user?}
+   \framesubtitle{Syntax additions}
+
+   \begin{itemize}
+      \item Priority
+         \begin{lstlisting}[escapechar=@]
+Func "bar" -> Int  @\colorbox{green}{\#>  12 R}@
+TypeFunc "foo" => Float => 'a => 'b  @\colorbox{green}{\#> 9}@
+         \end{lstlisting}
+
+      \item .NET
+         \begin{lstlisting}[escapechar=@]
+import @\colorbox{green}{System}@
+
+Func "dotNetTest" -> String
+dotNetTest -> @\colorbox{green}{DateTime.Now.ToString()}@
+         \end{lstlisting}
+   \end{itemize}
+\end{frame}
+
+\frame{%
+   \frametitle{How can the standard library be improved to serve the user?}
+      \begin{itemize}
+         \item Prelude
+         \item Number
+         \item Record
+         \item Monads
+      \end{itemize}
+}
+
+\begin{frame}[fragile]
+   \frametitle{How can the standard library be improved to serve the user?}
+   \framesubtitle{Prelude}
+   \begin{lstlisting}
+TypeAlias "Then" => Type
+Data "then" -> Then
+
+TypeAlias "Else" => Type
+Data "else" -> Else
+
+Func "if" -> Boolean^System -> Then -> 'a -> Else -> 'a -> 'a
+if True^builtin then f else g -> f
+if False^builtin then f else g -> g
+   \end{lstlisting}
+\end{frame}
+
+\frame{%
+   \frametitle{How can the standard library be improved to serve the user?}
+   \framesubtitle{Number \& Record}
+   \begin{itemize}
+      \item Number
+         \begin{itemize}
+            \item Generic
+         \end{itemize}
+      \item Record
+         \begin{itemize}
+            \item Compile time
+         \end{itemize}
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{How can the standard library be improved to serve the user?}
+   \framesubtitle{Monads}
+   \begin{itemize}
+      \item Monad
+      \item Monad transformers
+      \item TryableMonad
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{How can the standard library be improved to serve the user?}
+   \framesubtitle{Implemented monads \& monad transformers}
+   \begin{itemize}
+      \item List
+      \item Either
+      \item Result
+      \item State
+      \item Id
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{Advantages of Meta Casanova}
+   \begin{itemize}
+      \item Predictability
+      \item Definiteness
+      \item Succinctness
+      \item Safety
+      \item Choice of execution time
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{Conclusion}
+   \begin{itemize}
+      \item Sub research questions
+         \begin{itemize}
+            \item What is a good programming language to the user?
+            \item What is MC and how does it work?
+            \item How can the current syntax be improved to serve the user?
+            \item How can the standard library be improved to serve the user
+         \end{itemize}
+      \item Main research question
+         \begin{itemize}
+            \item How can the programming language Meta Casanova be improved for the user within the timeframe of the internship?
+         \end{itemize}
+      \item Video game industry
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{Conclusion}
+   \begin{center}
+      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{tired}
+   \end{center}
+}
+\frame{%
+   \frametitle{Conclusion}
+   \begin{center}
+      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{happy}
+   \end{center}
+}
+\frame{%
+   \frametitle{Conclusion}
+   \begin{center}
+      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{cashin}
+   \end{center}
+}
+
+\frame{%
+   \frametitle{Questions}
+   Questions
+}
+\end{document}
