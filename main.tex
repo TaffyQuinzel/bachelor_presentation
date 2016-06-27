@@ -1,4 +1,4 @@
-\documentclass[xetex,serif]{beamer}
+\documentclass[xetex,serif,aspectratio=169]{beamer}
 % \setbeamerfont{frametitle}{size=\Medium}
 \setbeamerfont{framesubtitle}{size=\large}
 
@@ -48,13 +48,14 @@ basicstyle=\ttfamily,
    \frametitle{Motive}
    \begin{itemize}
       \item Video game industry
+      \item Video game development
       \item Casanova
       \item Meta Casanova
    \end{itemize}
 }
 
 \frame{%
-   \frametitle{Research question}
+   \frametitle{Main research question}
    How can the programming language Meta Casanova be improved for the user within the timeframe of the internship?
 }
 
@@ -148,8 +149,8 @@ expanding M => @\colorbox{green}{Module}@{
    \begin{itemize}
       \item Priority
          \begin{lstlisting}[escapechar=@]
-Func "bar" -> Int  @\colorbox{green}{\#>  12 R}@
-TypeFunc "foo" => Float => 'a => 'b  @\colorbox{green}{\#> 9}@
+Func "bar" -> Int  @\colorbox{green}{\#>  12}@
+TypeFunc "foo" => Float => 'a => 'b  @\colorbox{green}{\#> 9 R}@
          \end{lstlisting}
 
       \item .NET
@@ -244,7 +245,7 @@ if False^builtin then f else g -> g
             \item What is a good programming language to the user?
             \item What is MC and how does it work?
             \item How can the current syntax be improved to serve the user?
-            \item How can the standard library be improved to serve the user
+            \item How can the standard library be improved to serve the user?
          \end{itemize}
       \item Main research question
          \begin{itemize}
@@ -275,6 +276,38 @@ if False^builtin then f else g -> g
 
 \frame{%
    \frametitle{Questions}
-   Questions
+   Any questions?
+}
+
+\frame{}
+
+\frame{%
+   \frametitle{Recommendations}
+   \begin{itemize}
+      \item Monads
+         \begin{itemize}
+            \item IO monad
+            \item Coroutine monad
+         \end{itemize}
+      \item The compiler
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{Monads in other languages}
+   \begin{center}
+      \begin{tabular}
+         { | l | l | l | }
+         \hline
+         \textbf{Language} & \textbf{Monad} & \textbf{Number of lines} \\
+         \hline
+         Python & State & 75 \\
+         \hline
+         Haskell & State transformer & 232 \\
+         \hline
+         Meta Casanova & State transformer & 23 \\
+         \hline
+      \end{tabular}
+   \end{center}
 }
 \end{document}
